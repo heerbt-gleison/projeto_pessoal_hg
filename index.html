@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heerbt Lima | Dev & Infra Hub</title>
+  <!-- Importando fontes modernas do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Conectando nosso arquivo CSS externo -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <main class="container">
+    <!-- CABEÇALHO -->
+    <header class="profile-header">
+      <!-- DICA DEV: Clique 3 vezes seguidas neste logo para ativar o Modo Admin! -->
+      <div class="avatar-monogram" id="admin-trigger" title="Heerbt Lima">&lt;HL/&gt;</div>
+      <div class="profile-info">
+        <div class="name-row">
+          <h1>Heerbt Lima</h1>
+          <span id="admin-badge" class="badge-admin hidden">MODO ADMIN ATIVO</span>
+        </div>
+        <p class="subtitle">Ciência da Computação • Dev & Infraestrutura de TI</p>
+        <p class="location">📍 Curitiba, PR</p>
+      </div>
+    </header>
+
+    <!-- NAVEGAÇÃO POR ABAS (SPA) -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="hub">Hub & Projetos</button>
+      <button class="tab-btn" data-tab="lab">Lab & Utilitários</button>
+      <button class="tab-btn" data-tab="jardim">Jardim Digital</button>
+    </nav>
+
+    <!-- ==========================================
+         ABA 1: HUB & PROJETOS
+         ========================================== -->
+    <section id="tab-hub" class="tab-content active">
+      <div class="bento-grid">
+        
+        <!-- Card Status /Now + Spotify -->
+        <div class="card span-2">
+          <div class="card-header">
+            <span class="status-dot"></span>
+            <h3>Status Atual (/now)</h3>
+            <button id="btn-edit-status" class="btn-admin hidden" onclick="editarStatusNow()">✏️ Editar</button>
+          </div>
+          <div id="status-now-content" class="status-list">
+            <!-- Preenchido via js/app.js -->
+          </div>
+        </div>
+
+        <!-- Links Rápidos -->
+        <div class="card">
+          <h3>Conexões</h3>
+          <div class="links-stack">
+            <a href="https://github.com/" target="_blank" class="link-btn">💻 GitHub</a>
+            <a href="https://linkedin.com/" target="_blank" class="link-btn">🔗 LinkedIn</a>
+            <a href="https://instagram.com/" target="_blank" class="link-btn">📸 Instagram</a>
+          </div>
+        </div>
+
+        <!-- Projetos Reais -->
+        <div class="card span-3">
+          <h3>Projetos & Sistemas</h3>
+          <div id="projetos-grid" class="projects-list">
+            <!-- Preenchido dinamicamente pelo js/dados.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ABA 2: LAB & UTILITÁRIOS
+         ========================================== -->
+    <section id="tab-lab" class="tab-content">
+      <div class="bento-grid">
+        
+        <!-- Calculadora de CFTV -->
+        <div class="card span-3">
+          <h3>📹 Calculadora de Armazenamento CFTV (H.265)</h3>
+          <p class="text-muted">Cálculo rápido para dimensionamento de HD em gravadores DVR/NVR.</p>
+          
+          <div class="calc-grid">
+            <label>
+              Qtd. Câmeras
+              <input type="number" id="cftv-cams" value="8" min="1" max="128">
+            </label>
+            <label>
+              Dias de Gravação
+              <input type="number" id="cftv-dias" value="30" min="1" max="365">
+            </label>
+            <label>
+              Resolução
+              <select id="cftv-res">
+                <option value="20">Full HD 1080p (~20 GB/dia)</option>
+                <option value="42">2K / 4MP (~42 GB/dia)</option>
+                <option value="75">4K / 8MP (~75 GB/dia)</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="calc-result" id="cftv-resultado">
+            <!-- Calculado em tempo real via js/app.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ABA 3: JARDIM DIGITAL (CHESS.COM, MÚSICA, HOBBIES)
+         ========================================== -->
+    <section id="tab-jardim" class="tab-content">
+      <div class="bento-grid">
+
+        <!-- Card Chess.com Real API -->
+        <div class="card span-2">
+          <div class="card-header">
+            <h3>♟️ Chess.com Stats (API Ao Vivo)</h3>
+            <button id="btn-edit-chess" class="btn-admin hidden" onclick="trocarUsuarioChess()">✏️ Trocar Nick</button>
+          </div>
+          <p id="chess-status" class="text-muted">Carregando ratings...</p>
+          
+          <div class="stats-row">
+            <div class="stat-box">
+              <span class="stat-label">Rápidas</span>
+              <strong id="chess-rapid">---</strong>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Blitz</span>
+              <strong id="chess-blitz">---</strong>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Bullet</span>
+              <strong id="chess-bullet">---</strong>
+            </div>
+          </div>
+          <a id="chess-profile-link" href="https://www.chess.com" target="_blank" class="link-btn mt-1">Desafiar no Chess.com ↗</a>
+        </div>
+
+        <!-- Card Spotify / Perfil Musical ao Vivo -->
+        <div class="card">
+          <div class="card-header">
+            <h3>🎧 No Fone</h3>
+            <button id="btn-edit-spotify" class="btn-admin hidden" onclick="configurarSpotifyAdmin()">⚙️ API</button>
+          </div>
+
+          <div id="spotify-live-box" class="spotify-box">
+            <span id="spotify-badge" class="music-tag">Conectando...</span>
+
+            <div class="spotify-track-row">
+              <img id="spotify-capa" src="" alt="Capa do Álbum" class="album-cover hidden">
+              <div class="track-info">
+                <strong id="musica-atual-titulo">Carregando...</strong>
+                <p id="musica-atual-faixa" class="text-muted">Aguarde</p>
+          </div>
+        </div>
+
+        <a id="spotify-link" href="https://open.spotify.com/" target="_blank" class="link-btn mt-1">Ouvir Faixa ↗</a>
+        </div>
+        </div>
+
+        <!-- Card Hobbies Gerenciáveis -->
+        <div class="card span-3">
+          <div class="card-header">
+            <h3>Meus Interesses & Hobbies</h3>
+            <button id="btn-add-hobby" class="btn-admin hidden" onclick="adicionarHobby()">+ Adicionar Hobby</button>
+          </div>
+          <div id="hobbies-grid" class="hobbies-list">
+            <!-- Preenchido e editável via js/app.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- SCRIPTS SEPARADOS POR RESPONSABILIDADE -->
+  <script src="js/dados.js"></script>
+  <script src="js/apis.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
